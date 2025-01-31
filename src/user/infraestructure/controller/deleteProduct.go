@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strings"
 
+	"practica_2/src/USER/infraestructure"
 	"practica_2/src/user/application"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -29,12 +30,15 @@ func DeleteProductHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Inyectamos el repositorio y caso de uso
-	repo :=
-	useCase := application.NewDeleteProduct(repo)
+	// Convertir ObjectID a string (hexadecimal)
+	idString := objID.Hex()
 
-	// Ejecutamos la eliminación
-	if err := useCase.Execute(objID); err != nil {
+	// Inyectamos el repositorio y el caso de uso
+	repo := infraestructure.NewMongoDBRepository()
+	useCase := application.NewRemoveProduct(repo) // Pasamos el repositorio al caso de uso
+
+	// Ejecutamos la eliminación, pasamos el id convertido a string
+	if err := useCase.Execute(idString); err != nil {
 		http.Error(w, "Error al eliminar el producto", http.StatusInternalServerError)
 		return
 	}

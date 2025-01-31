@@ -32,14 +32,14 @@ func ConnectDB() {
 		log.Fatal("No se pudo conectar a MongoDB:", err)
 	}
 
-	fmt.Println("✅ Conexión exitosa a MongoDB")
+	fmt.Println("Conexión exitosa a MongoDB")
 	MongoClient = client
 }
 
 
 func GetCollection(collectionName string) *mongo.Collection {
 	if MongoClient == nil {
-		log.Fatal("❌ Error: La conexión a MongoDB no ha sido inicializada. Llama a core.ConnectDB() antes de usar GetCollection().")
+		log.Fatal("Error: La conexión a MongoDB no ha sido inicializada. Llama a core.ConnectDB() antes de usar GetCollection().")
 	}
 	return MongoClient.Database("tu_base_de_datos").Collection(collectionName)
 }

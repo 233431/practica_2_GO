@@ -33,8 +33,8 @@ func UpdateProductHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Crear instancia del repositorio
-	repo := infraestructure.NewMongoDBRepository() // ✅ Ahora está bien definido
-	useCase := application.NewUpdateProduct(repo) // ✅ Asegúrate de que este caso de uso exista
+	repo := infraestructure.NewMongoDBRepository()
+	useCase := application.NewupCreateProduct(repo) 
 
 	// Ejecutar actualización
 	err = useCase.Execute(productID, &updatedProduct)
@@ -45,5 +45,5 @@ func UpdateProductHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Respuesta de éxito
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("✅ Producto actualizado correctamente"))
+	w.Write([]byte("Producto actualizado correctamente"))
 }

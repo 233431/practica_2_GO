@@ -11,6 +11,6 @@ func NewupCreateProduct(repo domain.Iproduct) *EditProduct{
 	return &EditProduct{repo: repo}
 }
 
-func (cp *EditProduct) Execute(id int, product *domain.Product)error{
+func (cp *EditProduct) Execute(id string, product *domain.Product)error{
 	return cp.repo.Update(id,product)
 }
